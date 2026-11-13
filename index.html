@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator (Windows 11 Fluent)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230078d4'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-12 3h10v2H7V6zm2 13H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-6h2v6z'/></svg>">
+</head>
+<body>
+  <div class="calculator-window">
+    <!-- Window Title Bar -->
+    <header class="titlebar">
+      <div class="titlebar-left">
+        <button id="menu-btn" class="icon-btn" title="Open Navigation">
+          <svg viewBox="0 0 16 16"><path fill="currentColor" d="M1 3h14v1.5H1V3zm0 4.25h14v1.5H1V7.25zm0 4.25h14V13H1v-1.5z"/></svg>
+        </button>
+        <span id="current-mode-title" class="window-title">Standard</span>
+      </div>
+      <div class="titlebar-right">
+        <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Theme">
+          <svg class="sun-icon" viewBox="0 0 16 16"><path fill="currentColor" d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0zm0 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13zm8-5a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8zM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8zm10.657-5.657a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0zm-9.193 9.192a.75.75 0 0 1 0 1.061l-1.06 1.06a.75.75 0 0 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0zm9.193 1.06a.75.75 0 0 1-1.06 0l-1.061-1.06a.75.75 0 1 1 1.06-1.061l1.061 1.06a.75.75 0 0 1 0 1.061zM4.464 4.464a.75.75 0 0 1-1.06 0L2.343 3.404a.75.75 0 0 1 1.06-1.061l1.061 1.06a.75.75 0 0 1 0 1.061z"/></svg>
+        </button>
+        <button id="history-toggle" class="icon-btn" title="History & Memory">
+          <svg viewBox="0 0 16 16"><path fill="currentColor" d="M8.5 4.75a.75.75 0 0 0-1.5 0v3.5c0 .2.08.39.22.53l2.25 2.25a.75.75 0 0 0 1.06-1.06L8.5 7.94V4.75z"/><path fill="currentColor" d="M8 1a7 7 0 1 0 4.95 11.95l1.06 1.06A8.5 8.5 0 1 1 8 0v1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Menu Modal / Flyout -->
+    <nav id="nav-drawer" class="nav-drawer hidden">
+      <div class="nav-header">Calculator Modes</div>
+      <button class="nav-item active" data-mode="Standard">
+        <span class="nav-icon">🖩</span> Standard
+      </button>
+      <button class="nav-item" data-mode="Scientific">
+        <span class="nav-icon">🔬</span> Scientific
+      </button>
+      <div class="nav-divider"></div>
+      <div class="nav-footer">
+        <small>Reconstructed from Microsoft.WindowsCalculator via REA</small>
+      </div>
+    </nav>
+
+    <!-- Main Calculator Content -->
+    <main class="calc-body">
+      <!-- Displays -->
+      <section class="display-container">
+        <div id="expression-display" class="expression-display"></div>
+        <div id="primary-display" class="primary-display">0</div>
+      </section>
+
+      <!-- Memory Bar -->
+      <section class="memory-bar">
+        <button id="btn-mc" class="mem-btn" disabled>MC</button>
+        <button id="btn-mr" class="mem-btn" disabled>MR</button>
+        <button id="btn-mplus" class="mem-btn">M+</button>
+        <button id="btn-mminus" class="mem-btn">M-</button>
+        <button id="btn-ms" class="mem-btn">MS</button>
+        <button id="btn-mflyout" class="mem-btn" disabled>M⌄</button>
+      </section>
+
+      <!-- Scientific Mode Extended Bar (Visible only in Scientific Mode) -->
+      <section id="scientific-bar" class="scientific-keypad hidden">
+        <button class="sci-btn angle-btn" id="btn-angle">DEG</button>
+        <button class="sci-btn" data-unary="Sin">sin</button>
+        <button class="sci-btn" data-unary="Cos">cos</button>
+        <button class="sci-btn" data-unary="Tan">tan</button>
+        <button class="sci-btn" data-op="PowerY">x^y</button>
+        <button class="sci-btn" data-unary="Sinh">sinh</button>
+        <button class="sci-btn" data-unary="Cosh">cosh</button>
+        <button class="sci-btn" data-unary="Tanh">tanh</button>
+        <button class="sci-btn" data-unary="LogBase10">log</button>
+        <button class="sci-btn" data-unary="LogBaseE">ln</button>
+        <button class="sci-btn" data-unary="Factorial">n!</button>
+        <button class="sci-btn" data-constant="PI">π</button>
+        <button class="sci-btn" data-constant="E">e</button>
+        <button class="sci-btn" data-unary="PowerX">10^x</button>
+        <button class="sci-btn" data-unary="Exp">e^x</button>
+      </section>
+
+      <!-- Keypad Grid (Standard / Core) -->
+      <section class="keypad">
+        <!-- Row 1 -->
+        <button class="key-btn op-btn" data-unary="Percent">%</button>
+        <button class="key-btn op-btn" id="btn-ce">CE</button>
+        <button class="key-btn op-btn" id="btn-c">C</button>
+        <button class="key-btn op-btn" id="btn-backspace">⌫</button>
+
+        <!-- Row 2 -->
+        <button class="key-btn op-btn" data-unary="Invert">¹/x</button>
+        <button class="key-btn op-btn" data-unary="Power2">x²</button>
+        <button class="key-btn op-btn" data-unary="Sqrt">²√x</button>
+        <button class="key-btn op-btn" data-op="Divide">÷</button>
+
+        <!-- Row 3 -->
+        <button class="key-btn num-btn" data-digit="7">7</button>
+        <button class="key-btn num-btn" data-digit="8">8</button>
+        <button class="key-btn num-btn" data-digit="9">9</button>
+        <button class="key-btn op-btn" data-op="Multiply">×</button>
+
+        <!-- Row 4 -->
+        <button class="key-btn num-btn" data-digit="4">4</button>
+        <button class="key-btn num-btn" data-digit="5">5</button>
+        <button class="key-btn num-btn" data-digit="6">6</button>
+        <button class="key-btn op-btn" data-op="Subtract">-</button>
+
+        <!-- Row 5 -->
+        <button class="key-btn num-btn" data-digit="1">1</button>
+        <button class="key-btn num-btn" data-digit="2">2</button>
+        <button class="key-btn num-btn" data-digit="3">3</button>
+        <button class="key-btn op-btn" data-op="Add">+</button>
+
+        <!-- Row 6 -->
+        <button class="key-btn num-btn" data-unary="Negate">+/-</button>
+        <button class="key-btn num-btn" data-digit="0">0</button>
+        <button class="key-btn num-btn" id="btn-decimal">.</button>
+        <button class="key-btn equal-btn" id="btn-equals">=</button>
+      </section>
+    </main>
+
+    <!-- Side Panel (History & Memory) -->
+    <aside id="side-panel" class="side-panel hidden">
+      <div class="panel-tabs">
+        <button id="tab-history" class="panel-tab active">History</button>
+        <button id="tab-memory" class="panel-tab">Memory</button>
+      </div>
+
+      <!-- History Content -->
+      <div id="history-content" class="panel-content">
+        <div id="history-list" class="history-list">
+          <div class="empty-state">There's no history yet</div>
+        </div>
+        <div class="panel-footer">
+          <button id="btn-clear-history" class="clear-btn" title="Clear all history">🗑</button>
+        </div>
+      </div>
+
+      <!-- Memory Content -->
+      <div id="memory-content" class="panel-content hidden">
+        <div id="memory-list" class="memory-list">
+          <div class="empty-state">There's nothing saved in memory</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

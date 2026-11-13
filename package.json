@@ -1,0 +1,20 @@
+{
+  "name": "windows-fluent-calculator",
+  "version": "1.0.0",
+  "description": "Windows Calculator reconstructed from Microsoft.WindowsCalculator binaries using Reverse Engineer Anything (REA)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/calc-engine.test.js"
+  },
+  "keywords": [
+    "calculator",
+    "windows-calculator",
+    "reverse-engineered",
+    "rea",
+    "fluent-design"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
