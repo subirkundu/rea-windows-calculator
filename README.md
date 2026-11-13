@@ -6,8 +6,12 @@
 
 A modern, high-precision Calculator application reconstructed from the official **Microsoft Windows Calculator** (`Microsoft.WindowsCalculator`) using **Reverse Engineer Anything (REA)**.
 
-<!-- Add your side-by-side screenshot here: -->
-<!-- ![Calculator Comparison](screenshot.png) -->
+<div align="center">
+  <br />
+  <img src="REA.png" alt="Side-by-side comparison between Native Windows 11 Calculator and the REA reconstructed Calculator" width="920" />
+  <p><em>Figure: Native Windows 11 Calculator (left) vs. REA Reconstructed Fluent Calculator (right)</em></p>
+  <br />
+</div>
 
 ---
 
@@ -62,6 +66,7 @@ Using the REA CLI and inspection tools on the system:
 ```text
 ├── index.html                 # Windows 11 Fluent UI frontend
 ├── style.css                  # Fluent Design tokens, Mica & Acrylic themes
+├── REA.png                    # Side-by-side comparison screenshot
 ├── src/
 │   ├── calc-engine.js         # Core calculation engine mirroring CalcViewModel.dll
 │   └── app.js                 # UI & event controller with keyboard listeners
