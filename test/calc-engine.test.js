@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 function testBasicOperations() {
   const calc = new CalcEngine(Mode.STANDARD);
   
-  // Test 7 + 8 = 15
+  // Test 7 + 8
   calc.inputDigit(7);
   calc.applyOperator(Operator.ADD);
   calc.inputDigit(8);
