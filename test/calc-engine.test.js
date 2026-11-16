@@ -3,8 +3,6 @@ import assert from 'node:assert/strict';
 
 function testBasicOperations() {
   const calc = new CalcEngine(Mode.STANDARD);
-  
-  // Test 7 + 8
   calc.inputDigit(7);
   calc.applyOperator(Operator.ADD);
   calc.inputDigit(8);
@@ -14,19 +12,19 @@ function testBasicOperations() {
   assert.equal(calc.historyItems[0].expression, '7 + 8 =');
   assert.equal(calc.historyItems[0].result, '15');
 
-  // Test 15 * 3 = 45
+
   calc.applyOperator(Operator.MULTIPLY);
   calc.inputDigit(3);
   calc.calculate();
   assert.equal(calc.getPrimaryDisplay(), '45');
 
-  // Test 45 - 5 = 40
+
   calc.applyOperator(Operator.SUBTRACT);
   calc.inputDigit(5);
   calc.calculate();
   assert.equal(calc.getPrimaryDisplay(), '40');
 
-  // Test 40 / 4 = 10
+  
   calc.applyOperator(Operator.DIVIDE);
   calc.inputDigit(4);
   calc.calculate();
