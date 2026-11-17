@@ -7,6 +7,7 @@ const args = process.argv.slice(2);
 if (args.length > 0) {
   const expr = args.join(' ');
   console.log(`Calculating: ${expr}`);
+  
   // Evaluate basic expression using CalcEngine
   const calc = new CalcEngine(Mode.SCIENTIFIC);
   const tokens = expr.match(/(\d+\.?\d*|\+|\-|\*|\/|\^|sqrt|sqr|fact|\%|\(|\))/gi) || [];
@@ -79,4 +80,5 @@ rl.on('line', (line) => {
     console.log(`Error: ${err.message}`);
   }
   rl.prompt();
+
 });
