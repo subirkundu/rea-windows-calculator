@@ -36,7 +36,6 @@ function testBasicOperations() {
 function testUnaryOperations() {
   const calc = new CalcEngine(Mode.STANDARD);
 
-  // Test √16 = 4
   calc.inputDigit(1);
   calc.inputDigit(6);
   calc.applyUnary(UnaryOperator.SQRT);
@@ -46,7 +45,6 @@ function testUnaryOperations() {
   calc.applyUnary(UnaryOperator.SQUARE);
   assert.equal(calc.getPrimaryDisplay(), '16');
 
-  // Test 1/16 = 0.0625
   calc.applyUnary(UnaryOperator.RECIPROCAL);
   assert.equal(calc.getPrimaryDisplay(), '0.0625');
 
@@ -62,6 +60,7 @@ function testUnaryOperations() {
 }
 
 function testDivisionByZero() {
+
   const calc = new CalcEngine(Mode.STANDARD);
   calc.inputDigit(9);
   calc.applyOperator(Operator.DIVIDE);
@@ -79,6 +78,7 @@ function testDivisionByZero() {
 }
 
 function testMemory() {
+  
   const calc = new CalcEngine(Mode.STANDARD);
   assert.equal(calc.hasMemory(), false);
 
